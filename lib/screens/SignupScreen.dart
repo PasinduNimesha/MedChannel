@@ -102,7 +102,7 @@ class SignupScreen extends StatelessWidget {
                       },
                       child: const Text(
                         "Sign up",
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                       style: ElevatedButton.styleFrom(
                         shape: const StadiumBorder(),
@@ -112,49 +112,6 @@ class SignupScreen extends StatelessWidget {
                     )
                 ),
 
-                const Center(child: Text("Or")),
-
-                Container(
-                  height: 45,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(25),
-                    border: Border.all(
-                      color: Colors.purple,
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.white.withOpacity(0.5),
-                        spreadRadius: 1,
-                        blurRadius: 1,
-                        offset: const Offset(0, 1), // changes position of shadow
-                      ),
-                    ],
-                  ),
-                  child: TextButton(
-                    onPressed: () {},
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          height: 30.0,
-                          width: 30.0,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                          ),
-                        ),
-
-                        const SizedBox(width: 18),
-
-                        const Text("Sign In with Google",
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.purple,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
