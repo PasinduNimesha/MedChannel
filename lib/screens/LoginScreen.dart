@@ -50,7 +50,7 @@ class LoginScreen extends StatelessWidget {
               filled: true,
               prefixIcon: const Icon(Icons.person)),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 30),
         TextField(
           decoration: InputDecoration(
             hintText: "Password",
@@ -63,7 +63,7 @@ class LoginScreen extends StatelessWidget {
           ),
           obscureText: true,
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 50),
         ElevatedButton(
           onPressed: () {
           },
@@ -74,7 +74,7 @@ class LoginScreen extends StatelessWidget {
           ),
           child: const Text(
             "Login",
-            style: TextStyle(fontSize: 20),
+            style: TextStyle(fontSize: 20, color: Colors.white),
           ),
         )
       ],
