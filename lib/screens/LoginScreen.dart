@@ -1,29 +1,78 @@
 import 'package:flutter/material.dart';
-
+import 'package:http/http.dart' as http;
+import 'package:med_channel/screens/patient/HomeScreen.dart';
+import 'dart:convert';
 import 'SignupScreen.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  bool _isLoading = false;
+
+  Future<void> authenticate() async {
+    final String username = _usernameController.text;
+    final String password = _passwordController.text;
+
+    setState(() {
+      _isLoading = true;
+    });
+
+    final response = await http.post(
+      Uri.parse('https://z9uf7auwa7.execute-api.us-east-1.amazonaws.com/users/authenticate'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'username': username,
+        'password': password,
+      }),
+    );
+
+    setState(() {
+      _isLoading = false;
+    });
+
+    if (response.statusCode == 200) {
+      // Successful authentication
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Login Successful!')),
+      );
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const Homescreen()));
+      // Navigate to another screen if needed
+    } else {
+      // Failed authentication
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Login Failed! Please try again.')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-          margin: const EdgeInsets.all(24),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              _header(context),
-              _inputField(context),
-              _forgotPassword(context),
-              _signup(context),
-            ],
-          ),
+      body: Container(
+        margin: const EdgeInsets.all(24),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            _header(context),
+            _inputField(context),
+            _forgotPassword(context),
+            _signup(context),
+          ],
         ),
-      );
+      ),
+    );
   }
 
-  _header(context) {
+  Widget _header(BuildContext context) {
     return const Column(
       children: [
         Text(
@@ -35,11 +84,12 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  _inputField(context) {
+  Widget _inputField(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         TextField(
+          controller: _usernameController,
           decoration: InputDecoration(
               hintText: "Username",
               border: OutlineInputBorder(
@@ -52,6 +102,7 @@ class LoginScreen extends StatelessWidget {
         ),
         const SizedBox(height: 30),
         TextField(
+          controller: _passwordController,
           decoration: InputDecoration(
             hintText: "Password",
             border: OutlineInputBorder(
@@ -64,9 +115,10 @@ class LoginScreen extends StatelessWidget {
           obscureText: true,
         ),
         const SizedBox(height: 50),
-        ElevatedButton(
-          onPressed: () {
-          },
+        _isLoading
+            ? const Center(child: CircularProgressIndicator())
+            : ElevatedButton(
+          onPressed: authenticate,
           style: ElevatedButton.styleFrom(
             shape: const StadiumBorder(),
             padding: const EdgeInsets.symmetric(vertical: 16),
@@ -81,7 +133,7 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  _forgotPassword(context) {
+  Widget _forgotPassword(BuildContext context) {
     return TextButton(
       onPressed: () {},
       child: const Text("Forgot password?",
@@ -90,11 +142,11 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  _signup(context) {
+  Widget _signup(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text("Dont have an account? "),
+        const Text("Don't have an account? "),
         TextButton(
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) => const SignupScreen()));
