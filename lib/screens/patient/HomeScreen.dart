@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:med_channel/styles/colors.dart';
+import 'package:med_channel/tabs/ChatTab.dart';
 import 'package:med_channel/tabs/HomeTab.dart';
 import 'package:med_channel/tabs/ScheduleTab.dart';
+import 'package:med_channel/tabs/SettingsTab.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -13,6 +15,8 @@ class HomeScreen extends StatefulWidget {
 List<Map> navigationBarItems = [
   {'icon': Icons.local_hospital, 'index': 0},
   {'icon': Icons.calendar_today, 'index': 1},
+  {'icon': Icons.chat, 'index': 2},
+  {'icon': Icons.settings, 'index': 3}
 ];
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -30,6 +34,8 @@ class _HomeScreenState extends State<HomeScreen> {
         onPressedScheduleCard: goToSchedule,
       ),
       ScheduleTab(),
+      ChatTab(),
+      SettingsTab()
     ];
 
     return Scaffold(
