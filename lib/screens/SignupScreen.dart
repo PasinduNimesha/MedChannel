@@ -166,14 +166,14 @@ class _SignupScreenState extends State<SignupScreen> {
                     ? const Center(child: CircularProgressIndicator())
                     : ElevatedButton(
                   onPressed: signup,
-                  child: const Text(
-                    "Sign up",
-                    style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
                   style: ElevatedButton.styleFrom(
                     shape: const StadiumBorder(),
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     backgroundColor: Colors.purple,
+                  ),
+                  child: const Text(
+                    "Sign up",
+                    style: TextStyle(fontSize: 20, color: Colors.white),
                   ),
                 ),
               ),
