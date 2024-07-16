@@ -44,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Login Successful!')),
       );
-      Navigator.push(context, MaterialPageRoute(builder: (context) => const Homescreen()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
       // Navigate to another screen if needed
     } else {
       // Failed authentication
