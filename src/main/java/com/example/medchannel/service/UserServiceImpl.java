@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.HashMap;
 import java.util.List;
@@ -33,8 +34,8 @@ public class UserServiceImpl implements UserService {
         if (ObjectUtils.isEmpty(userDTO)) {
             throw new UserException("User details cannot be null");
         }
-        String password_hash = userDTO.password();
-        User user = new User(userDTO.id(), userDTO.username(), userDTO.email(), userDTO.password());
+        String password_hash = new BCryptPasswordEncoder().encode(userDTO.password());
+        User user = new User(userDTO.id(), userDTO.username(), userDTO.email(), password_hash);
         dynamoDBMapper.save(user);
         return new ResponseDTO<>("User created successfully", new UserDTO(user.getId(), user.getUsername(), user.getEmail(), user.getPassword_hash()));
     }
