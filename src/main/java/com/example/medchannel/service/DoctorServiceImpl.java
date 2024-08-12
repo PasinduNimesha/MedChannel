@@ -48,8 +48,8 @@ public class DoctorServiceImpl implements DoctorService {
         );
         dynamoDBMapper.save(Doctor);
         return new ResponseDTO<>("Doctor created successfully", new DoctorDTO(
-                Doctor.getId(),
-                Doctor.getDoc_id(),
+                DoctorDTO.doc_id(),
+                DoctorDTO.id(),
                 Doctor.getFirst_name(),
                 Doctor.getLast_name(),
                 Doctor.isAvailable(),
@@ -67,8 +67,8 @@ public class DoctorServiceImpl implements DoctorService {
         List<Doctor> DoctorList = dynamoDBMapper.scan(Doctor.class, new DynamoDBScanExpression());
         log.info("Doctor list count => {}", DoctorList.size());
         return DoctorList.stream().map(e -> new DoctorDTO(
-                e.getId(),
                 e.getDoc_id(),
+                e.getId(),
                 e.getFirst_name(),
                 e.getLast_name(),
                 e.isAvailable(),
@@ -89,8 +89,8 @@ public class DoctorServiceImpl implements DoctorService {
         }
         Doctor Doctor = dynamoDBMapper.load(Doctor.class, id);
         return new DoctorDTO(
-                Doctor.getId(),
                 Doctor.getDoc_id(),
+                Doctor.getId(),
                 Doctor.getFirst_name(),
                 Doctor.getLast_name(),
                 Doctor.isAvailable(),
@@ -110,8 +110,8 @@ public class DoctorServiceImpl implements DoctorService {
             throw new DoctorException("Doctor details cannot be null");
         }
         Doctor Doctor = new Doctor(
-                DoctorDTO.id(),
                 DoctorDTO.doc_id(),
+                DoctorDTO.id(),
                 DoctorDTO.first_name(),
                 DoctorDTO.last_name(),
                 DoctorDTO.available(),
@@ -124,8 +124,8 @@ public class DoctorServiceImpl implements DoctorService {
         );
         dynamoDBMapper.save(Doctor, buildExpression(Doctor));
         return new ResponseDTO<>("Doctor updated successfully", new DoctorDTO(
-                Doctor.getId(),
                 Doctor.getDoc_id(),
+                Doctor.getId(),
                 Doctor.getFirst_name(),
                 Doctor.getLast_name(),
                 Doctor.isAvailable(),
