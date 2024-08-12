@@ -4,6 +4,6 @@ public record UserDTO(
         String id,
         String username,
         String email,
-        String password_hash) {
+        String password) {
 
 }
