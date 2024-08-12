@@ -20,6 +20,10 @@ public class Doctor{
     @DynamoDBAttribute
     private String id;
     @DynamoDBAttribute
+    private String first_name;
+    @DynamoDBAttribute
+    private String last_name;
+    @DynamoDBAttribute
     private boolean available;
     @DynamoDBAttribute
     private int experience;
