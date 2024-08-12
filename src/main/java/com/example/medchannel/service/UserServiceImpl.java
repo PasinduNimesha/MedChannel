@@ -33,7 +33,8 @@ public class UserServiceImpl implements UserService {
         if (ObjectUtils.isEmpty(userDTO)) {
             throw new UserException("User details cannot be null");
         }
-        User user = new User(userDTO.id(), userDTO.username(), userDTO.email(), userDTO.password_hash());
+        String password_hash = userDTO.password();
+        User user = new User(userDTO.id(), userDTO.username(), userDTO.email(), userDTO.password());
         dynamoDBMapper.save(user);
         return new ResponseDTO<>("User created successfully", new UserDTO(user.getId(), user.getUsername(), user.getEmail(), user.getPassword_hash()));
     }
@@ -61,7 +62,7 @@ public class UserServiceImpl implements UserService {
         if (ObjectUtils.isEmpty(userDTO)) {
             throw new UserException("User details cannot be null");
         }
-        User user = new User(userDTO.id(), userDTO.username(), userDTO.email(), userDTO.password_hash());
+        User user = new User(userDTO.id(), userDTO.username(), userDTO.email(), userDTO.password());
         dynamoDBMapper.save(user, buildExpression(user));
         return new ResponseDTO<>("User updated successfully", new UserDTO(user.getId(), user.getUsername(), user.getEmail(), user.getPassword_hash()));
     }
