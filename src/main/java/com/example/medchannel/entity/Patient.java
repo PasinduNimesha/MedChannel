@@ -20,6 +20,10 @@ public class Patient {
     @DynamoDBAttribute
     private String id;
     @DynamoDBAttribute
+    private String first_name;
+    @DynamoDBAttribute
+    private String last_name;
+    @DynamoDBAttribute
     private String address;
     @DynamoDBAttribute
     private String phone;
