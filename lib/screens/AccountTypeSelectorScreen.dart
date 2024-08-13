@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:med_channel/screens/physician/RegistrationScreen.dart';
 
 class AccountTypeSelectorScreen extends StatefulWidget {
-  const AccountTypeSelectorScreen({super.key});
+  final String id;
+  const AccountTypeSelectorScreen({super.key, required this.id});
 
   @override
   State<AccountTypeSelectorScreen> createState() => _AccountTypeSelectorScreenState();
@@ -28,7 +29,7 @@ class _AccountTypeSelectorScreenState extends State<AccountTypeSelectorScreen> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const RegisterationScreen()),
+                  MaterialPageRoute(builder: (context) => RegisterationScreen(id: widget.id)),
                 );
               },
               child: const Text('Physician'),
