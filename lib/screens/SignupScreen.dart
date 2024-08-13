@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:med_channel/screens/AccountTypeSelectorScreen.dart';
 import 'dart:convert';
 
 import 'LoginScreen.dart';
@@ -58,7 +59,7 @@ class _SignupScreenState extends State<SignupScreen> {
       );
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const LoginScreen()),
+        MaterialPageRoute(builder: (context) => const AccountTypeSelectorScreen()),
       );
     } else {
       // Failed signup
