@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import '../physician/HomeScreen.dart';
+
 class RegisterationScreen extends StatefulWidget {
   final String id;
   const RegisterationScreen({Key? key, required this.id}) : super(key: key);
@@ -63,6 +65,7 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Registration Successful!')),
           );
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
         } else {
           // Registration failed
           ScaffoldMessenger.of(context).showSnackBar(
