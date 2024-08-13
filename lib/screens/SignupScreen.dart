@@ -54,12 +54,13 @@ class _SignupScreenState extends State<SignupScreen> {
 
     if (response.statusCode == 200) {
       // Successful signup
+      final id = jsonDecode(response.body)['id'].toString();
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Signup Successful!')),
       );
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const AccountTypeSelectorScreen()),
+        MaterialPageRoute(builder: (context) => AccountTypeSelectorScreen(id: id)),
       );
     } else {
       // Failed signup
