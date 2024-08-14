@@ -1,37 +1,58 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:med_channel/styles/colors.dart';
 import 'package:med_channel/styles/styles.dart';
+import 'package:http/http.dart' as http;
 
-List<Map> doctors = [
-  {
-    'img': 'assets/doctor02.png',
-    'doctorName': 'Dr. Gardner Pearson',
-    'doctorTitle': 'Heart Specialist'
-  },
-  {
-    'img': 'assets/doctor03.jpeg',
-    'doctorName': 'Dr. Rosa Williamson',
-    'doctorTitle': 'Skin Specialist'
-  },
-  {
-    'img': 'assets/doctor02.png',
-    'doctorName': 'Dr. Gardner Pearson',
-    'doctorTitle': 'Heart Specialist'
-  },
-  {
-    'img': 'assets/doctor03.jpeg',
-    'doctorName': 'Dr. Rosa Williamson',
-    'doctorTitle': 'Skin Specialist'
+Future<List<Map<String, dynamic>>> fetchTopDoctors() async {
+  final response = await http.get(Uri.parse('http://192.168.43.214:8080/api/v1/doctor/all'));
+
+  if (response.statusCode == 200) {
+    List<dynamic> data = json.decode(response.body);
+    return data.map((doctor) => {
+      'img': doctor['img'] ?? 'assets/doctor01.jpeg', // Ensure default image if null
+      'doctorName': doctor['first_name'] + " " + doctor['last_name'] ?? 'Unknown Doctor',
+      'doctorTitle': doctor['specialty'] ?? 'Unknown Specialty',
+    }).toList();
+  } else {
+    throw Exception('Failed to load top doctors');
   }
-];
+}
 
-class HomeTab extends StatelessWidget {
+
+class HomeTab extends StatefulWidget {
   final void Function() onPressedScheduleCard;
 
   const HomeTab({
     Key? key,
     required this.onPressedScheduleCard,
   }) : super(key: key);
+
+  @override
+  _HomeTabState createState() => _HomeTabState();
+}
+
+class _HomeTabState extends State<HomeTab> {
+  List<Map<String, dynamic>> doctors = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchAndSetTopDoctors();
+  }
+
+  Future<void> fetchAndSetTopDoctors() async {
+    try {
+      List<Map<String, dynamic>> fetchedDoctors = await fetchTopDoctors();
+      setState(() {
+        doctors = fetchedDoctors;
+      });
+    } catch (error) {
+      print('Error fetching doctors: $error');
+      // Handle error (e.g., show a message to the user)
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +100,7 @@ class HomeTab extends StatelessWidget {
               height: 20,
             ),
             AppointmentCard(
-              onTap: onPressedScheduleCard,
+              onTap: widget.onPressedScheduleCard,
             ),
             SizedBox(
               height: 20,
@@ -94,18 +115,22 @@ class HomeTab extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            for (var doctor in doctors)
-              TopDoctorCard(
-                img: doctor['img'],
-                doctorName: doctor['doctorName'],
-                doctorTitle: doctor['doctorTitle'],
-              )
+            if (doctors.isEmpty)
+              Center(child: CircularProgressIndicator())
+            else
+              for (var doctor in doctors)
+                TopDoctorCard(
+                  img: doctor['img']!,
+                  doctorName: doctor['doctorName']!,
+                  doctorTitle: doctor['doctorTitle']!,
+                )
           ],
         ),
       ),
     );
   }
 }
+
 
 class TopDoctorCard extends StatelessWidget {
   String img;
@@ -162,23 +187,6 @@ class TopDoctorCard extends StatelessWidget {
                 SizedBox(
                   height: 5,
                 ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.star,
-                      color: Color(MyColors.yellow02),
-                      size: 18,
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Text(
-                      '4.0 - 50 Reviews',
-                      style: TextStyle(color: Color(MyColors.grey02)),
-                    )
-                  ],
-                )
               ],
             )
           ],
