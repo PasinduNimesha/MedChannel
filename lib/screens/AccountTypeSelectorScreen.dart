@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:med_channel/screens/physician/RegistrationScreen.dart';
+import 'package:med_channel/screens/patient/PatientRegistrationScreen.dart';
+import 'package:med_channel/screens/physician/PhysicianRegistrationScreen.dart';
 
 class AccountTypeSelectorScreen extends StatefulWidget {
   final String id;
@@ -22,14 +23,19 @@ class _AccountTypeSelectorScreenState extends State<AccountTypeSelectorScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
-              onPressed: null,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => PatientRegisterationScreen(id: widget.id)),
+                );
+              },
               child: const Text('Patient'),
             ),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => RegisterationScreen(id: widget.id)),
+                  MaterialPageRoute(builder: (context) => PhysicianRegisterationScreen(id: widget.id)),
                 );
               },
               child: const Text('Physician'),
