@@ -5,15 +5,19 @@ import 'package:med_channel/styles/colors.dart';
 import 'package:med_channel/styles/styles.dart';
 import 'package:http/http.dart' as http;
 
+import '../screens/PhysicianDetailScreen.dart';
+
 Future<List<Map<String, dynamic>>> fetchTopDoctors() async {
   final response = await http.get(Uri.parse('http://192.168.43.214:8080/api/v1/doctor/all'));
 
   if (response.statusCode == 200) {
     List<dynamic> data = json.decode(response.body);
+    print(data);
     return data.map((doctor) => {
       'img': doctor['img'] ?? 'assets/doctor01.jpeg', // Ensure default image if null
       'doctorName': doctor['first_name'] + " " + doctor['last_name'] ?? 'Unknown Doctor',
       'doctorTitle': doctor['specialty'] ?? 'Unknown Specialty',
+      'id': doctor['doc_id'] ?? 'Unknown ID',
     }).toList();
   } else {
     throw Exception('Failed to load top doctors');
@@ -123,6 +127,8 @@ class _HomeTabState extends State<HomeTab> {
                   img: doctor['img']!,
                   doctorName: doctor['doctorName']!,
                   doctorTitle: doctor['doctorTitle']!,
+                  id: doctor['id']!,
+
                 )
           ],
         ),
@@ -136,11 +142,14 @@ class TopDoctorCard extends StatelessWidget {
   String img;
   String doctorName;
   String doctorTitle;
+  String id;
+
 
   TopDoctorCard({
     required this.img,
     required this.doctorName,
     required this.doctorTitle,
+    required this.id,
   });
 
   @override
@@ -149,7 +158,7 @@ class TopDoctorCard extends StatelessWidget {
       margin: EdgeInsets.only(bottom: 20),
       child: InkWell(
         onTap: () {
-          Navigator.pushNamed(context, '/detail');
+          Navigator.push(context, MaterialPageRoute(builder: (context) => PhysicianDetailScreen(physicianId: id)));
         },
         child: Row(
           children: [
