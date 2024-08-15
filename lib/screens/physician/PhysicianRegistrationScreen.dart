@@ -36,7 +36,7 @@ class _PhysicianRegisterationScreenState extends State<PhysicianRegisterationScr
 
       // Prepare the JSON data
       final Map<String, dynamic> registrationData = {
-        "id": widget.id,
+        "doc_id": widget.id,
         "first_name": firstName,
         "last_name": lastName,
         "available": true,
@@ -50,6 +50,7 @@ class _PhysicianRegisterationScreenState extends State<PhysicianRegisterationScr
 
       // Endpoint URL
       final url = Uri.parse('http://192.168.43.214:8080/api/v1/doctor');
+      print("ID:" + widget.id);
 
       try {
         // Send the POST request
