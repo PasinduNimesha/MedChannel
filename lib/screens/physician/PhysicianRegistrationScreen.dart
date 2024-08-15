@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-import '../physician/HomeScreen.dart';
+import '../physician/PhysicianHomeScreen.dart';
 
 class PhysicianRegisterationScreen extends StatefulWidget {
   final String id;
@@ -66,7 +66,7 @@ class _PhysicianRegisterationScreenState extends State<PhysicianRegisterationScr
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Registration Successful!')),
           );
-          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => PhysicianHomeScreen()));
         } else {
           // Registration failed
           ScaffoldMessenger.of(context).showSnackBar(
