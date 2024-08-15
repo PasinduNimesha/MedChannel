@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:med_channel/screens/patient/HomeScreen.dart';
+import 'package:med_channel/screens/patient/PatientHomeScreen.dart';
+import 'package:med_channel/screens/physician/PhysicianHomeScreen.dart';
 import 'dart:convert';
 import 'SignupScreen.dart';
 
@@ -44,7 +45,13 @@ class _LoginScreenState extends State<LoginScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Login Successful!')),
       );
-      Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+      //check if the user is a patient or a physician
+      if(jsonDecode(response.body)['role'] == 'patient'){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const PatientHomeScreen()));
+      }
+      if(jsonDecode(response.body)['role'] == 'doctor'){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const PhysicianHomeScreen()));
+      }
       // Navigate to another screen if needed
     } else {
       // Failed authentication
