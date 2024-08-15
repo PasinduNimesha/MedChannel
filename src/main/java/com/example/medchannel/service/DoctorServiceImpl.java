@@ -35,7 +35,6 @@ public class DoctorServiceImpl implements DoctorService {
         }
         Doctor Doctor = new Doctor(
                 DoctorDTO.doc_id(),
-                DoctorDTO.id(),
                 DoctorDTO.first_name(),
                 DoctorDTO.last_name(),
                 DoctorDTO.available(),
@@ -49,7 +48,6 @@ public class DoctorServiceImpl implements DoctorService {
         dynamoDBMapper.save(Doctor);
         return new ResponseDTO<>("Doctor created successfully", new DoctorDTO(
                 DoctorDTO.doc_id(),
-                DoctorDTO.id(),
                 Doctor.getFirst_name(),
                 Doctor.getLast_name(),
                 Doctor.isAvailable(),
@@ -68,7 +66,6 @@ public class DoctorServiceImpl implements DoctorService {
         log.info("Doctor list count => {}", DoctorList.size());
         return DoctorList.stream().map(e -> new DoctorDTO(
                 e.getDoc_id(),
-                e.getId(),
                 e.getFirst_name(),
                 e.getLast_name(),
                 e.isAvailable(),
@@ -90,7 +87,6 @@ public class DoctorServiceImpl implements DoctorService {
         Doctor Doctor = dynamoDBMapper.load(Doctor.class, id);
         return new DoctorDTO(
                 Doctor.getDoc_id(),
-                Doctor.getId(),
                 Doctor.getFirst_name(),
                 Doctor.getLast_name(),
                 Doctor.isAvailable(),
@@ -111,7 +107,6 @@ public class DoctorServiceImpl implements DoctorService {
         }
         Doctor Doctor = new Doctor(
                 DoctorDTO.doc_id(),
-                DoctorDTO.id(),
                 DoctorDTO.first_name(),
                 DoctorDTO.last_name(),
                 DoctorDTO.available(),
@@ -125,7 +120,6 @@ public class DoctorServiceImpl implements DoctorService {
         dynamoDBMapper.save(Doctor, buildExpression(Doctor));
         return new ResponseDTO<>("Doctor updated successfully", new DoctorDTO(
                 Doctor.getDoc_id(),
-                Doctor.getId(),
                 Doctor.getFirst_name(),
                 Doctor.getLast_name(),
                 Doctor.isAvailable(),
@@ -155,7 +149,7 @@ public class DoctorServiceImpl implements DoctorService {
     private DynamoDBSaveExpression buildExpression(Doctor Doctor) {
         DynamoDBSaveExpression dynamoDBSaveExpression = new DynamoDBSaveExpression();
         Map<String, ExpectedAttributeValue> expectedAttributeValueMap = new HashMap<>();
-        expectedAttributeValueMap.put("id", new ExpectedAttributeValue(new AttributeValue().withS(Doctor.getId())));
+        expectedAttributeValueMap.put("id", new ExpectedAttributeValue(new AttributeValue().withS(Doctor.getDoc_id())));
         dynamoDBSaveExpression.setExpected(expectedAttributeValueMap);
         return dynamoDBSaveExpression;
     }
