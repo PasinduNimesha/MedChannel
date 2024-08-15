@@ -35,7 +35,6 @@ public class PatientServiceImpl implements PatientService {
         }
         Patient Patient = new Patient(
                 PatientDTO.patient_id(),
-                PatientDTO.id(),
                 PatientDTO.first_name(),
                 PatientDTO.last_name(),
                 PatientDTO.address(),
@@ -49,7 +48,6 @@ public class PatientServiceImpl implements PatientService {
         dynamoDBMapper.save(Patient);
         return new ResponseDTO<>("Patient created successfully", new PatientDTO(
                 PatientDTO.patient_id(),
-                PatientDTO.id(),
                 PatientDTO.first_name(),
                 PatientDTO.last_name(),
                 PatientDTO.address(),
@@ -68,7 +66,6 @@ public class PatientServiceImpl implements PatientService {
         log.info("Patient list count => {}", PatientList.size());
         return PatientList.stream().map(e -> new PatientDTO(
                 e.getPatient_id(),
-                e.getId(),
                 e.getFirst_name(),
                 e.getLast_name(),
                 e.getAddress(),
@@ -90,7 +87,6 @@ public class PatientServiceImpl implements PatientService {
         Patient Patient = dynamoDBMapper.load(Patient.class, id);
         return new PatientDTO(
                 Patient.getPatient_id(),
-                Patient.getId(),
                 Patient.getFirst_name(),
                 Patient.getLast_name(),
                 Patient.getAddress(),
@@ -111,7 +107,6 @@ public class PatientServiceImpl implements PatientService {
         }
         Patient Patient = new Patient(
                 PatientDTO.patient_id(),
-                PatientDTO.id(),
                 PatientDTO.first_name(),
                 PatientDTO.last_name(),
                 PatientDTO.address(),
@@ -125,7 +120,6 @@ public class PatientServiceImpl implements PatientService {
         dynamoDBMapper.save(Patient, buildExpression(Patient));
         return new ResponseDTO<>("Patient updated successfully", new PatientDTO(
                 PatientDTO.patient_id(),
-                PatientDTO.id(),
                 PatientDTO.first_name(),
                 PatientDTO.last_name(),
                 PatientDTO.address(),
@@ -155,7 +149,7 @@ public class PatientServiceImpl implements PatientService {
     private DynamoDBSaveExpression buildExpression(Patient Patient) {
         DynamoDBSaveExpression dynamoDBSaveExpression = new DynamoDBSaveExpression();
         Map<String, ExpectedAttributeValue> expectedAttributeValueMap = new HashMap<>();
-        expectedAttributeValueMap.put("id", new ExpectedAttributeValue(new AttributeValue().withS(Patient.getId())));
+        expectedAttributeValueMap.put("id", new ExpectedAttributeValue(new AttributeValue().withS(Patient.getPatient_id())));
         dynamoDBSaveExpression.setExpected(expectedAttributeValueMap);
         return dynamoDBSaveExpression;
     }
