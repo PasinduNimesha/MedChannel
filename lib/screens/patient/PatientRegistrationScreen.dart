@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import '../physician/PhysicianHomeScreen.dart';
+import 'PatientHomeScreen.dart';
 
 class PatientRegisterationScreen extends StatefulWidget {
   final String id;
@@ -68,7 +69,7 @@ class _PatientRegisterationScreenState extends State<PatientRegisterationScreen>
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Registration Successful!')),
           );
-          Navigator.push(context, MaterialPageRoute(builder: (context) => PhysicianHomeScreen()));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => PatientHomeScreen()));
         } else {
           // Registration failed
           ScaffoldMessenger.of(context).showSnackBar(
@@ -204,7 +205,7 @@ class _PatientRegisterationScreenState extends State<PatientRegisterationScreen>
                     const SizedBox(height: 30),
                     TextFormField(
                       validator: (value) {
-                        if (value!.isEmpty || value.length < 4) {
+                        if (value!.isEmpty) {
                           return 'Please enter a valid blood type';
                         }
                         return null;
