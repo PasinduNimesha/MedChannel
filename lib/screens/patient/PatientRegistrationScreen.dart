@@ -39,7 +39,7 @@ class _PatientRegisterationScreenState extends State<PatientRegisterationScreen>
 
       // Prepare the JSON data
       final Map<String, dynamic> registrationData = {
-        "id": widget.id,
+        "patient_id": widget.id,
         "first_name": firstName,
         "last_name": lastName,
         "address": address,
