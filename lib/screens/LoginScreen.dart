@@ -47,7 +47,9 @@ class _LoginScreenState extends State<LoginScreen> {
       );
       //check if the user is a patient or a physician
       if(jsonDecode(response.body)['role'] == 'patient'){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => const PatientHomeScreen()));
+        //extract patientID
+        final patientId = jsonDecode(response.body)['id'].toString();
+        Navigator.push(context, MaterialPageRoute(builder: (context) => PatientHomeScreen(patientId: patientId,)));
       }
       if(jsonDecode(response.body)['role'] == 'doctor'){
         Navigator.push(context, MaterialPageRoute(builder: (context) => const PhysicianHomeScreen()));
