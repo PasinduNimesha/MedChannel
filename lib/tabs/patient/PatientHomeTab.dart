@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 import '../../screens/PhysicianDetailScreen.dart';
 
 Future<List<Map<String, dynamic>>> fetchTopDoctors() async {
-  final response = await http.get(Uri.parse('http://192.168.43.214:8080/api/v1/doctor/all'));
+  final response = await http.get(Uri.parse('http://192.168.43.214:8080/api/v1/physician/all'));
 
   if (response.statusCode == 200) {
     List<dynamic> data = json.decode(response.body);
@@ -26,11 +26,13 @@ Future<List<Map<String, dynamic>>> fetchTopDoctors() async {
 
 
 class PatientHomeTab extends StatefulWidget {
+  final String patientId;
   final void Function() onPressedScheduleCard;
 
   const PatientHomeTab({
     super.key,
     required this.onPressedScheduleCard,
+    required this.patientId,
   });
 
   @override
@@ -128,6 +130,7 @@ class _PatientHomeTabState extends State<PatientHomeTab> {
                   doctorName: doctor['doctorName']!,
                   doctorTitle: doctor['doctorTitle']!,
                   id: doctor['id']!,
+                  patientId: widget.patientId,
 
                 )
           ],
@@ -143,6 +146,7 @@ class TopDoctorCard extends StatelessWidget {
   String doctorName;
   String doctorTitle;
   String id;
+  String patientId;
 
 
   TopDoctorCard({
@@ -150,6 +154,7 @@ class TopDoctorCard extends StatelessWidget {
     required this.doctorName,
     required this.doctorTitle,
     required this.id,
+    required this.patientId,
   });
 
   @override
@@ -158,7 +163,10 @@ class TopDoctorCard extends StatelessWidget {
       margin: EdgeInsets.only(bottom: 20),
       child: InkWell(
         onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => PhysicianDetailScreen(physicianId: id)));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => PhysicianDetailScreen(
+              physicianId: id,
+              patientId: patientId,
+          )));
         },
         child: Row(
           children: [
