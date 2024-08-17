@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:med_channel/screens/patient/NewAppointmentScreen.dart';
 import 'dart:convert';
 import 'package:med_channel/styles/colors.dart';
 
 class PhysicianDetailScreen extends StatefulWidget {
   final String physicianId;
+  final String patientId;
 
   const PhysicianDetailScreen({
     Key? key,
     required this.physicianId,
+    required this.patientId,
   }) : super(key: key);
 
   @override
@@ -28,7 +31,7 @@ class _PhysicianDetailScreenState extends State<PhysicianDetailScreen> {
   Future<void> fetchPhysicianDetails(String id) async {
     try {
       final response = await http.get(
-        Uri.parse('http://192.168.43.214:8080/api/v1/doctor/$id'),
+        Uri.parse('http://192.168.43.214:8080/api/v1/physician/$id'),
       );
 
       if (response.statusCode == 200) {
@@ -113,7 +116,7 @@ class _PhysicianDetailScreenState extends State<PhysicianDetailScreen> {
             Center(
               child: ElevatedButton(
                 onPressed: () {
-                  // Handle appointment action here
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => NewAppointmentScreen(patientId: widget.patientId, physicianId: widget.physicianId)));
                 },
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15), backgroundColor: Color(MyColors.yellow01),
