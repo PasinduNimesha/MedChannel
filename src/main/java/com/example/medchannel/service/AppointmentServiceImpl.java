@@ -39,6 +39,7 @@ public class AppointmentServiceImpl implements AppointmentService {
                 AppointmentDTO.doc_id(),
                 AppointmentDTO.appointment_date(),
                 AppointmentDTO.appointment_time(),
+                AppointmentDTO.remarks(),
                 AppointmentDTO.created_at(),
                 AppointmentDTO.updated_at()
 
@@ -50,6 +51,7 @@ public class AppointmentServiceImpl implements AppointmentService {
                 AppointmentDTO.doc_id(),
                 AppointmentDTO.appointment_date(),
                 AppointmentDTO.appointment_time(),
+                AppointmentDTO.remarks(),
                 AppointmentDTO.created_at(),
                 AppointmentDTO.updated_at()
 
@@ -66,6 +68,7 @@ public class AppointmentServiceImpl implements AppointmentService {
                 e.getDoc_id(),
                 e.getAppointment_date(),
                 e.getAppointment_time(),
+                e.getRemarks(),
                 e.getCreated_at(),
                 e.getUpdated_at()
 
@@ -95,6 +98,7 @@ public class AppointmentServiceImpl implements AppointmentService {
                 e.getDoc_id(),
                 e.getAppointment_date(),
                 e.getAppointment_time(),
+                e.getRemarks(),
                 e.getCreated_at(),
                 e.getUpdated_at()
         )).collect(Collectors.toList());
@@ -124,6 +128,7 @@ public class AppointmentServiceImpl implements AppointmentService {
                 e.getDoc_id(),
                 e.getAppointment_date(),
                 e.getAppointment_time(),
+                e.getRemarks(),
                 e.getCreated_at(),
                 e.getUpdated_at()
         )).collect(Collectors.toList());
@@ -143,6 +148,7 @@ public class AppointmentServiceImpl implements AppointmentService {
                 Appointment.getDoc_id(),
                 Appointment.getAppointment_date(),
                 Appointment.getAppointment_time(),
+                Appointment.getRemarks(),
                 Appointment.getCreated_at(),
                 Appointment.getUpdated_at()
 
@@ -161,6 +167,7 @@ public class AppointmentServiceImpl implements AppointmentService {
                 AppointmentDTO.doc_id(),
                 AppointmentDTO.appointment_date(),
                 AppointmentDTO.appointment_time(),
+                AppointmentDTO.remarks(),
                 AppointmentDTO.created_at(),
                 AppointmentDTO.updated_at()
 
@@ -172,6 +179,7 @@ public class AppointmentServiceImpl implements AppointmentService {
                 AppointmentDTO.doc_id(),
                 AppointmentDTO.appointment_date(),
                 AppointmentDTO.appointment_time(),
+                AppointmentDTO.remarks(),
                 AppointmentDTO.created_at(),
                 AppointmentDTO.updated_at()
 
