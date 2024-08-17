@@ -69,7 +69,9 @@ class _PatientRegisterationScreenState extends State<PatientRegisterationScreen>
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Registration Successful!')),
           );
-          Navigator.push(context, MaterialPageRoute(builder: (context) => PatientHomeScreen()));
+          //extract patientID
+          final patientId = jsonDecode(response.body)['id'].toString();
+          Navigator.push(context, MaterialPageRoute(builder: (context) => PatientHomeScreen(patientId: patientId,)));
         } else {
           // Registration failed
           ScaffoldMessenger.of(context).showSnackBar(
