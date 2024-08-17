@@ -6,7 +6,8 @@ import 'package:med_channel/tabs/ScheduleTab.dart';
 import 'package:med_channel/tabs/SettingsTab.dart';
 
 class PatientHomeScreen extends StatefulWidget {
-  const PatientHomeScreen({Key? key}) : super(key: key);
+  final String patientId;
+  const PatientHomeScreen({super.key, required this.patientId});
 
   @override
   _PatientHomeScreenState createState() => _PatientHomeScreenState();
@@ -32,6 +33,7 @@ class _PatientHomeScreenState extends State<PatientHomeScreen> {
     List<Widget> screens = [
       PatientHomeTab(
         onPressedScheduleCard: goToSchedule,
+        patientId: widget.patientId,
       ),
       ScheduleTab(),
       ChatTab(),
