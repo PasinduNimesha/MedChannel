@@ -24,6 +24,8 @@ public class Appointment {
     @DynamoDBAttribute
     private String appointment_time;
     @DynamoDBAttribute
+    private String remarks;
+    @DynamoDBAttribute
     private String created_at;
     @DynamoDBAttribute
     private String updated_at;
