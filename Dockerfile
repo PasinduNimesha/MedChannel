@@ -1,12 +1,16 @@
 FROM openjdk:17
 WORKDIR /app
 
-# Copy the Maven wrapper files and pom.xml
+# Install dos2unix
+RUN sudo apt update && sudo apt install dos2unix
+
+# Copy the Maven wrapper files and convert line endings
 COPY ./mvnw ./mvnw
+RUN dos2unix ./mvnw
 COPY ./.mvn ./.mvn
 COPY ./pom.xml ./pom.xml
 
-# Download dependencies2
+# Download dependencies
 RUN ./mvnw dependency:go-offline
 
 # Copy the source code
