@@ -1,12 +1,8 @@
 FROM openjdk:17
 WORKDIR /app
 
-# Install dos2unix
-RUN apt-get update && apt-get install -y dos2unix
-
-# Copy the Maven wrapper files and convert line endings
+# Copy the Maven wrapper files and pom.xml
 COPY ./mvnw ./mvnw
-RUN dos2unix ./mvnw
 COPY ./.mvn ./.mvn
 COPY ./pom.xml ./pom.xml
 
