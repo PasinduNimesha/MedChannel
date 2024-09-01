@@ -1,4 +1,4 @@
-FROM openjdk:17
+FROM openjdk:17-slim
 WORKDIR /app
 
 # Install dos2unix
