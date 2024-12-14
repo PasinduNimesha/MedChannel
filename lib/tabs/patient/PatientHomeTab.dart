@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:med_channel/screens/patient/PatientProfile.dart';
 import 'package:med_channel/styles/colors.dart';
 import 'package:med_channel/styles/styles.dart';
 import 'package:http/http.dart' as http;
@@ -8,11 +9,10 @@ import 'package:http/http.dart' as http;
 import '../../screens/PhysicianDetailScreen.dart';
 
 Future<List<Map<String, dynamic>>> fetchTopDoctors() async {
-  final response = await http.get(Uri.parse('http://192.168.43.214:8080/api/v1/physician/all'));
+  final response = await http.get(Uri.parse('http://192.168.43.214:8081/api/v1/physician/all'));
 
   if (response.statusCode == 200) {
     List<dynamic> data = json.decode(response.body);
-    print(data);
     return data.map((doctor) => {
       'img': doctor['img'] ?? 'assets/doctor01.jpeg', // Ensure default image if null
       'doctorName': doctor['first_name'] + " " + doctor['last_name'] ?? 'Unknown Doctor',
@@ -498,8 +498,17 @@ class UserIntro extends StatelessWidget {
             ),
           ],
         ),
-        const CircleAvatar(
-          backgroundImage: AssetImage('assets/person.jpeg'),
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            shape: CircleBorder(),
+          ),
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => PatientProfile()));
+          },
+          child: const CircleAvatar(
+            backgroundImage: AssetImage('assets/person.jpeg'),
+            minRadius: 30,
+          ),
         )
       ],
     );
