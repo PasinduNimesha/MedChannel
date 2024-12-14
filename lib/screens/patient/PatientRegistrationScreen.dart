@@ -53,7 +53,7 @@ class _PatientRegisterationScreenState extends State<PatientRegisterationScreen>
       };
 
       // Endpoint URL
-      final url = Uri.parse('http://192.168.43.214:8080/api/v1/patient');
+      final url = Uri.parse('http://192.168.43.214:8081/api/v1/patient');
 
       try {
         // Send the POST request
