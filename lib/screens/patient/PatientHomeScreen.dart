@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:med_channel/styles/colors.dart';
 import 'package:med_channel/tabs/ChatTab.dart';
 import 'package:med_channel/tabs/patient/PatientHomeTab.dart';
-import 'package:med_channel/tabs/ScheduleTab.dart';
+import 'package:med_channel/tabs/patient/AppointmentsTab.dart';
 import 'package:med_channel/tabs/SettingsTab.dart';
 
 class PatientHomeScreen extends StatefulWidget {
@@ -35,7 +35,7 @@ class _PatientHomeScreenState extends State<PatientHomeScreen> {
         onPressedScheduleCard: goToSchedule,
         patientId: widget.patientId,
       ),
-      ScheduleTab(),
+      ScheduleTab(patientId: widget.patientId,),
       ChatTab(),
       SettingsTab()
     ];
