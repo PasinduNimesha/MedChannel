@@ -41,3 +41,10 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+assets/doctor01.jpeg
+assets/doctor02.png
+assets/doctor03.jpeg
+assets/doctor05.jpeg
+assets/doctor04.jpeg
+assets/hospital.jpeg
+assets/person.jpeg
