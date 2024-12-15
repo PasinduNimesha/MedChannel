@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:med_channel/styles/colors.dart';
 import 'package:med_channel/tabs/ChatTab.dart';
 import 'package:med_channel/tabs/patient/PatientHomeTab.dart';
-import 'package:med_channel/tabs/ScheduleTab.dart';
+import 'package:med_channel/tabs/patient/AppointmentsTab.dart';
 import 'package:med_channel/tabs/SettingsTab.dart';
 import 'package:med_channel/tabs/physician/PhysicianHomeTab.dart';
 
@@ -32,7 +32,7 @@ class _PhysicianHomeScreenState extends State<PhysicianHomeScreen> {
   Widget build(BuildContext context) {
     List<Widget> screens = [
       Physicianhometab(),
-      ScheduleTab(),
+      ScheduleTab(patientId: "",),
       ChatTab(),
       SettingsTab()
     ];
