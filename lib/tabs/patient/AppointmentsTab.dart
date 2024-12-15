@@ -13,8 +13,7 @@ Future<List<Map<String, dynamic>>> fetchAppointments(String patientID) async {
       'appointment_date': appointment['appointment_date'],
       'appointment_time': appointment['appointment_time'],
       'remarks': appointment['remarks'],
-      'status': "Upcoming", // Static status for simplicity
-      // Add more details if needed
+      'status': "Upcoming",
     }).toList();
   } else {
     throw Exception('Failed to load appointments');
