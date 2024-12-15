@@ -31,7 +31,7 @@ class _PhysicianDetailScreenState extends State<PhysicianDetailScreen> {
   Future<void> fetchPhysicianDetails(String id) async {
     try {
       final response = await http.get(
-        Uri.parse('http://192.168.43.214:8080/api/v1/physician/$id'),
+        Uri.parse('http://192.168.43.214:8081/api/v1/physician/$id'),
       );
 
       if (response.statusCode == 200) {
