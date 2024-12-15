@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http_parser/http_parser.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+import 'package:http/http.dart' as http;
 
 class PatientProfile extends StatefulWidget {
   const PatientProfile({super.key});
@@ -41,24 +45,43 @@ class _PatientProfileState extends State<PatientProfile> {
       // _profilePicture = File('path_to_existing_profile_picture');
     });
   }
-
-  // Function to save patient data (placeholder)
+// Function to save patient data
   Future<void> _savePatientData() async {
-    // Simulate saving data to an API
-    final updatedData = {
-      "name": nameController.text,
-      "email": emailController.text,
-      "phone": phoneController.text,
-      "profilePicture": _profilePicture?.path ?? "No Picture",
-    };
+    const String apiUrl = "http://192.168.43.214:8081/images/upload";
 
-    // Mock success
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Profile updated successfully!')),
+    if (_profilePicture == null) {
+      print('No profile picture selected.');
+      return;
+    }
+
+    var request = http.MultipartRequest('POST', Uri.parse(apiUrl));
+
+    // Add the image file with an explicit Content-Type
+    var pic = await http.MultipartFile.fromPath(
+      'file',
+      _profilePicture!.path,
+      filename: 'profile_picture.png',
+      contentType: MediaType('image', 'png'), // Set the Content-Type explicitly
     );
 
-    print("Updated Data: $updatedData"); // Replace with API call
+    request.files.add(pic);
+
+    try {
+      var response = await request.send();
+
+      if (response.statusCode == 200) {
+        print('Profile updated successfully');
+      } else {
+        print('Failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
   }
+
+
+
+
 
   @override
   void initState() {
