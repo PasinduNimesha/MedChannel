@@ -66,6 +66,8 @@ class _PatientProfileState extends State<PatientProfile> {
     );
 
     request.files.add(pic);
+
+    // Add patientId as a field
     request.fields['patientId'] = widget.patientId;
 
     try {
