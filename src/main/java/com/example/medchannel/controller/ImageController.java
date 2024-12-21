@@ -1,6 +1,9 @@
 package com.example.medchannel.controller;
 
+import com.example.medchannel.dto.PatientDTO;
+import com.example.medchannel.entity.Patient;
 import com.example.medchannel.service.PatientServiceImpl;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,8 +24,9 @@ public class ImageController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile file) {
-        // Check if the file is empty
+    public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile file, @RequestParam("patientID") String patientID) {
+        // Get patientID from json body
+
         if (file.isEmpty()) {
             System.out.println("File is empty!");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("File is empty!");
@@ -39,6 +43,17 @@ public class ImageController {
             }
             //upload the file
             String url = patientServiceImpl.uploadProfilePicture(file);
+
+            //check if the patient exists
+            Patient patient = new ModelMapper().map(patientServiceImpl.getPatient(patientID), Patient.class);
+            if (patient == null) {
+                System.out.println("Patient not found!");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Patient not found!");
+            } else {
+                //update the patient's image_url
+                patient.setImage_url(url);
+            }
+
             System.out.println("File uploaded successfully: " + url);
 
             System.out.println("File uploaded successfully: ");
