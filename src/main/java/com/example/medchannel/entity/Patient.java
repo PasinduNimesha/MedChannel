@@ -31,4 +31,6 @@ public class Patient {
     private String created_at;
     @DynamoDBAttribute
     private String updated_at;
+    @DynamoDBAttribute
+    private String image_url;
 }
