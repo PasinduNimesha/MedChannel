@@ -9,6 +9,7 @@ public record PatientDTO(String patient_id,
                          String blood_type,
                          String dob,
                          String created_at,
-                         String updated_at) {
+                         String updated_at,
+                         String image_url) {
 
 }
