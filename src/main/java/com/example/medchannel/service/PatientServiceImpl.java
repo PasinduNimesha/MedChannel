@@ -50,7 +50,7 @@ public class PatientServiceImpl implements PatientService {
                 PatientDTO.blood_type(),
                 PatientDTO.created_at(),
                 PatientDTO.updated_at(),
-                ""
+                "test100"
                 );
         dynamoDBMapper.save(Patient);
         return new ResponseDTO<>("Patient created successfully", new PatientDTO(
@@ -161,7 +161,7 @@ public class PatientServiceImpl implements PatientService {
     private DynamoDBSaveExpression buildExpression(Patient Patient) {
         DynamoDBSaveExpression dynamoDBSaveExpression = new DynamoDBSaveExpression();
         Map<String, ExpectedAttributeValue> expectedAttributeValueMap = new HashMap<>();
-        expectedAttributeValueMap.put("id", new ExpectedAttributeValue(new AttributeValue().withS(Patient.getPatient_id())));
+        expectedAttributeValueMap.put("patient_id", new ExpectedAttributeValue(new AttributeValue().withS(Patient.getPatient_id())));
         dynamoDBSaveExpression.setExpected(expectedAttributeValueMap);
         return dynamoDBSaveExpression;
     }
