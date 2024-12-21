@@ -71,7 +71,7 @@ class _PatientHomeTabState extends State<PatientHomeTab> {
             SizedBox(
               height: 20,
             ),
-            UserIntro(),
+            UserIntro(patientId: widget.patientId,),
             SizedBox(
               height: 10,
             ),
@@ -476,9 +476,11 @@ class SearchInput extends StatelessWidget {
 }
 
 class UserIntro extends StatelessWidget {
+  final String patientId;
   const UserIntro({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+    required this.patientId,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -503,7 +505,7 @@ class UserIntro extends StatelessWidget {
             shape: CircleBorder(),
           ),
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => PatientProfile()));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => PatientProfile(patientId: patientId,)));
           },
           child: const CircleAvatar(
             backgroundImage: AssetImage('assets/person.jpeg'),
