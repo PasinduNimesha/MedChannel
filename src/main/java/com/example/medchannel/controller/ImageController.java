@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Objects;
 
 @RestController
@@ -24,9 +25,7 @@ public class ImageController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile file, @RequestParam("patientID") String patientID) {
-        // Get patientID from json body
-
+    public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile file, @RequestParam("patientId") String patientID) {
         if (file.isEmpty()) {
             System.out.println("File is empty!");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("File is empty!");
@@ -41,23 +40,37 @@ public class ImageController {
                 System.out.println("Invalid file type: " + file.getContentType());
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid file type. Only images are allowed!");
             }
-            //upload the file
+
+            // Upload the file
             String url = patientServiceImpl.uploadProfilePicture(file);
 
-            //check if the patient exists
-            Patient patient = new ModelMapper().map(patientServiceImpl.getPatient(patientID), Patient.class);
+            // Check if the patient exists
+            PatientDTO patient = patientServiceImpl.getPatient(patientID);
             if (patient == null) {
                 System.out.println("Patient not found!");
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Patient not found!");
             } else {
-                //update the patient's image_url
-                patient.setImage_url(url);
+                // Update the patient's image_url
+                PatientDTO updatedPatient = new PatientDTO(
+                        patient.patient_id(),
+                        patient.first_name(),
+                        patient.last_name(),
+                        patient.address(),
+                        patient.phone(),
+                        patient.gender(),
+                        patient.blood_type(),
+                        patient.dob(),
+                        patient.created_at(),
+                        patient.updated_at(),
+                        url
+                );
+                System.out.println("Patient: ");
+                patientServiceImpl.updatePatient(updatedPatient);
+                System.out.println("PatientDTO: ");
             }
 
             System.out.println("File uploaded successfully: " + url);
-
-            System.out.println("File uploaded successfully: ");
-            return ResponseEntity.ok("File uploaded successfully: ");
+            return ResponseEntity.ok("File uploaded successfully: " + url);
         } catch (Exception e) {
             System.out.println("Failed to upload file: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload file.");
