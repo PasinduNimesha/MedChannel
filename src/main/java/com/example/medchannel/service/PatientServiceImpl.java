@@ -49,7 +49,8 @@ public class PatientServiceImpl implements PatientService {
                 PatientDTO.gender(),
                 PatientDTO.blood_type(),
                 PatientDTO.created_at(),
-                PatientDTO.updated_at()
+                PatientDTO.updated_at(),
+                ""
                 );
         dynamoDBMapper.save(Patient);
         return new ResponseDTO<>("Patient created successfully", new PatientDTO(
@@ -62,7 +63,8 @@ public class PatientServiceImpl implements PatientService {
                 PatientDTO.gender(),
                 PatientDTO.blood_type(),
                 PatientDTO.created_at(),
-                PatientDTO.updated_at()
+                PatientDTO.updated_at(),
+                PatientDTO.image_url()
         ));
     }
 
@@ -80,7 +82,8 @@ public class PatientServiceImpl implements PatientService {
                 e.getGender(),
                 e.getBlood_type(),
                 e.getCreated_at(),
-                e.getUpdated_at()
+                e.getUpdated_at(),
+                e.getImage_url()
                 )).collect(Collectors.toList());
     }
 
@@ -101,7 +104,8 @@ public class PatientServiceImpl implements PatientService {
                 Patient.getGender(),
                 Patient.getBlood_type(),
                 Patient.getCreated_at(),
-                Patient.getUpdated_at()
+                Patient.getUpdated_at(),
+                Patient.getImage_url()
                 );
     }
 
@@ -121,7 +125,8 @@ public class PatientServiceImpl implements PatientService {
                 PatientDTO.gender(),
                 PatientDTO.blood_type(),
                 PatientDTO.created_at(),
-                PatientDTO.updated_at()
+                PatientDTO.updated_at(),
+                PatientDTO.image_url()
                 );
         dynamoDBMapper.save(Patient, buildExpression(Patient));
         return new ResponseDTO<>("Patient updated successfully", new PatientDTO(
@@ -134,7 +139,8 @@ public class PatientServiceImpl implements PatientService {
                 PatientDTO.gender(),
                 PatientDTO.blood_type(),
                 PatientDTO.created_at(),
-                PatientDTO.updated_at()
+                PatientDTO.updated_at(),
+                PatientDTO.image_url()
         ));
     }
 
