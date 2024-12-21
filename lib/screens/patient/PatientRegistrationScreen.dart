@@ -48,7 +48,9 @@ class _PatientRegisterationScreenState extends State<PatientRegisterationScreen>
         "gender": gender,
         "blood_type": bloodType,
         "created_at": DateTime.now().toIso8601String(),
-        "updated_at": DateTime.now().toIso8601String()
+        "updated_at": DateTime.now().toIso8601String(),
+        "dob": DateTime.now().toIso8601String(),
+        "image_url": " "
 
       };
 
