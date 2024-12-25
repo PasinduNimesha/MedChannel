@@ -25,7 +25,7 @@ public class ImageController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile file, @RequestParam("patientId") String patientID) {
+    public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile file, @RequestParam("patientID") String patientID) {
         if (file.isEmpty()) {
             System.out.println("File is empty!");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("File is empty!");
@@ -45,6 +45,7 @@ public class ImageController {
             String url = patientServiceImpl.uploadProfilePicture(file);
 
             // Check if the patient exists
+            System.out.println("Patient ID: " + patientID);
             PatientDTO patient = patientServiceImpl.getPatient(patientID);
             if (patient == null) {
                 System.out.println("Patient not found!");
