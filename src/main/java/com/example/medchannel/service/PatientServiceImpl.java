@@ -50,7 +50,7 @@ public class PatientServiceImpl implements PatientService {
                 PatientDTO.blood_type(),
                 PatientDTO.created_at(),
                 PatientDTO.updated_at(),
-                "test100"
+                ""
                 );
         dynamoDBMapper.save(Patient);
         return new ResponseDTO<>("Patient created successfully", new PatientDTO(
