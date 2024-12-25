@@ -55,6 +55,7 @@ class _SignupScreenState extends State<SignupScreen> {
     if (response.statusCode == 200) {
       // Successful signup
       final id = jsonDecode(response.body)['id'].toString();
+      print('Signup successful with ID: $id');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Signup Successful!')),
       );
