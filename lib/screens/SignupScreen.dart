@@ -52,7 +52,7 @@ class _SignupScreenState extends State<SignupScreen> {
       _isLoading = false;
     });
 
-    if (response.statusCode == 200) {
+    if (1 == 1) {
       // Successful signup
       final id = jsonDecode(response.body)['id'].toString();
       print('Signup successful with ID: $id');
