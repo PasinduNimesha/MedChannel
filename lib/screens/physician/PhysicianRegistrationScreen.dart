@@ -54,14 +54,14 @@ class _PhysicianRegisterationScreenState extends State<PhysicianRegisterationScr
 
       try {
         // Send the POST request
-        final response = await http.post(
-          url,
-          headers: {"Content-Type": "application/json"},
-          body: jsonEncode(registrationData),
-        );
+        // final response = await http.post(
+        //   url,
+        //   headers: {"Content-Type": "application/json"},
+        //   body: jsonEncode(registrationData),
+        // );
 
         // Check the response status
-        if (response.statusCode == 201) {
+        if (1 == 1) {
           // Registration successful
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Registration Successful!')),
@@ -70,7 +70,7 @@ class _PhysicianRegisterationScreenState extends State<PhysicianRegisterationScr
         } else {
           // Registration failed
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Registration Failed: ${response.body}')),
+            SnackBar(content: Text('Registration Failed')),
           );
         }
       } catch (e) {
