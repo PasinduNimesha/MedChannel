@@ -24,6 +24,7 @@ class _AccountTypeSelectorScreenState extends State<AccountTypeSelectorScreen> {
           children: [
             ElevatedButton(
               onPressed: () {
+                print(widget.id);
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => PatientRegisterationScreen(id: widget.id)),
