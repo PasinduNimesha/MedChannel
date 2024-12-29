@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:med_channel/styles/colors.dart';
-import 'package:med_channel/tabs/ChatTab.dart';
-import 'package:med_channel/tabs/patient/PatientHomeTab.dart';
 import 'package:med_channel/tabs/patient/AppointmentsTab.dart';
 import 'package:med_channel/tabs/SettingsTab.dart';
 import 'package:med_channel/tabs/physician/PhysicianHomeTab.dart';
@@ -9,7 +7,7 @@ import 'package:med_channel/tabs/physician/PhysicianHomeTab.dart';
 import '../../tabs/ChatLogsTab.dart';
 
 class PhysicianHomeScreen extends StatefulWidget {
-  const PhysicianHomeScreen({Key? key}) : super(key: key);
+  const PhysicianHomeScreen({super.key});
 
   @override
   _PhysicianHomeScreenState createState() => _PhysicianHomeScreenState();
