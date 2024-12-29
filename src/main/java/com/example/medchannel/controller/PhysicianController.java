@@ -29,7 +29,7 @@ public class PhysicianController {
 
     @PostMapping
     public ResponseEntity<ResponseDTO<PhysicianDTO>> createPhysician(@RequestBody PhysicianDTO PhysicianDTO) {
-        return new ResponseEntity<>(PhysicianService.savePhysician(PhysicianDTO), HttpStatus.CREATED);
+        return new ResponseEntity<>(PhysicianService.savePhysician(PhysicianDTO), HttpStatus.OK);
     }
 
     @PatchMapping
