@@ -5,6 +5,8 @@ import 'package:med_channel/tabs/patient/PatientHomeTab.dart';
 import 'package:med_channel/tabs/patient/AppointmentsTab.dart';
 import 'package:med_channel/tabs/SettingsTab.dart';
 
+import '../../tabs/ChatLogsTab.dart';
+
 class PatientHomeScreen extends StatefulWidget {
   final String patientId;
   const PatientHomeScreen({super.key, required this.patientId});
@@ -36,7 +38,7 @@ class _PatientHomeScreenState extends State<PatientHomeScreen> {
         patientId: widget.patientId,
       ),
       ScheduleTab(patientId: widget.patientId,),
-      ChatTab(),
+      ChatLogsTab(),
       SettingsTab()
     ];
 
