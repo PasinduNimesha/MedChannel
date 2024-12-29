@@ -49,19 +49,19 @@ class _PhysicianRegisterationScreenState extends State<PhysicianRegisterationScr
       };
 
       // Endpoint URL
-      final url = Uri.parse('http://192.168.43.214:8081/api/v1/doctor');
+      final url = Uri.parse('http://192.168.43.214:8081/api/v1/physician');
       print("ID:" + widget.id);
 
       try {
         // Send the POST request
-        // final response = await http.post(
-        //   url,
-        //   headers: {"Content-Type": "application/json"},
-        //   body: jsonEncode(registrationData),
-        // );
+        final response = await http.post(
+          url,
+          headers: {"Content-Type": "application/json"},
+          body: jsonEncode(registrationData),
+        );
 
         // Check the response status
-        if (1 == 1) {
+        if (response.statusCode == 200) {
           // Registration successful
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Registration Successful!')),
@@ -69,6 +69,7 @@ class _PhysicianRegisterationScreenState extends State<PhysicianRegisterationScr
           Navigator.push(context, MaterialPageRoute(builder: (context) => PhysicianHomeScreen()));
         } else {
           // Registration failed
+          print(response.body);
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Registration Failed')),
           );
