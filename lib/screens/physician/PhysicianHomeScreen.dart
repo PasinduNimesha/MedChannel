@@ -6,6 +6,8 @@ import 'package:med_channel/tabs/patient/AppointmentsTab.dart';
 import 'package:med_channel/tabs/SettingsTab.dart';
 import 'package:med_channel/tabs/physician/PhysicianHomeTab.dart';
 
+import '../../tabs/ChatLogsTab.dart';
+
 class PhysicianHomeScreen extends StatefulWidget {
   const PhysicianHomeScreen({Key? key}) : super(key: key);
 
@@ -33,7 +35,7 @@ class _PhysicianHomeScreenState extends State<PhysicianHomeScreen> {
     List<Widget> screens = [
       Physicianhometab(),
       ScheduleTab(patientId: "",),
-      ChatTab(),
+      ChatLogsTab(),
       SettingsTab()
     ];
 
