@@ -6,7 +6,7 @@ import 'package:med_channel/styles/colors.dart';
 import 'package:med_channel/styles/styles.dart';
 import 'package:http/http.dart' as http;
 
-import '../../screens/PhysicianDetailScreen.dart';
+import '../../screens/physician/PhysicianDetailScreen.dart';
 
 Future<List<Map<String, dynamic>>> fetchTopDoctors() async {
   final response = await http.get(Uri.parse('http://192.168.43.214:8081/api/v1/physician/all'));
