@@ -31,7 +31,7 @@ class _PhysicianHomeScreenState extends State<PhysicianHomeScreen> {
   @override
   Widget build(BuildContext context) {
     List<Widget> screens = [
-      Physicianhometab(),
+      PhysicianHomeTab(),
       ScheduleTab(patientId: "",),
       ChatLogsTab(),
       SettingsTab()
