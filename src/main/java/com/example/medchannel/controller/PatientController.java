@@ -56,8 +56,6 @@ public class PatientController {
         }
 
         // Set the profile picture URL in the DTO
-//        patientDTO.setProfilePictureUrl(profilePictureUrl);
-
         return new ResponseEntity<>(PatientService.savePatient(patientDTO), HttpStatus.CREATED);
     }
 }
