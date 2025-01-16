@@ -40,7 +40,6 @@ public class ImageController {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid file type. Only images are allowed!");
             }
 
-            // Upload the file
             String url = patientServiceImpl.uploadProfilePicture(file);
 
             // Check if the patient exists
