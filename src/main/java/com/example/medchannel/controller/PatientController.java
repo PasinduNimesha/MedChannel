@@ -52,7 +52,6 @@ public class PatientController {
         String profilePictureUrl = null;
         if (profilePicture != null && !profilePicture.isEmpty()) {
             // Upload to S3 and get the URL
-//            profilePictureUrl = patientService.uploadProfilePicture(profilePicture);
             System.out.println("Uploaded profile picture to S3");
         }
 
