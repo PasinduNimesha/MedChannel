@@ -35,13 +35,11 @@ public class ImageController {
             // Get the original filename
             String originalFilename = Objects.requireNonNull(file.getOriginalFilename());
 
-            // Validate the file type (only allow image files)
             if (!file.getContentType().startsWith("image/")) {
                 System.out.println("Invalid file type: " + file.getContentType());
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid file type. Only images are allowed!");
             }
 
-            // Upload the file
             String url = patientServiceImpl.uploadProfilePicture(file);
 
             // Check if the patient exists
