@@ -18,6 +18,8 @@ public class Physician{
     @DynamoDBAttribute
     private String last_name;
     @DynamoDBAttribute
+    private String gender;
+    @DynamoDBAttribute
     private boolean available;
     @DynamoDBAttribute
     private int experience;
