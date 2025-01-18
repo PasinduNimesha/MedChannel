@@ -3,6 +3,7 @@ package com.example.medchannel.dto;
 public record PhysicianDTO(String doc_id,
                      String first_name,
                      String last_name,
+                     String gender,
                      boolean available,
                      int experience,
                      String specialty,
