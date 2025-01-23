@@ -32,7 +32,6 @@ public class ImageController {
         }
 
         try {
-            // Get the original filename
             String originalFilename = Objects.requireNonNull(file.getOriginalFilename());
 
             if (!file.getContentType().startsWith("image/")) {
