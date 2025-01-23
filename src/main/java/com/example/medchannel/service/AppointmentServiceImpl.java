@@ -79,8 +79,6 @@ public class AppointmentServiceImpl implements AppointmentService {
         if (!StringUtils.hasLength(patient_id)) {
             throw new AppointmentException("Patient id cannot be null");
         }
-
-        // Create a query expression to filter by patient_id
         Map<String, AttributeValue> eav = new HashMap<>();
         eav.put(":patient_id", new AttributeValue().withS(patient_id));
 
@@ -110,7 +108,6 @@ public class AppointmentServiceImpl implements AppointmentService {
             throw new AppointmentException("Doctor id cannot be null");
         }
 
-        // Create a query expression to filter by doc_id
         Map<String, AttributeValue> eav = new HashMap<>();
         eav.put(":doc_id", new AttributeValue().withS(doc_id));
 
