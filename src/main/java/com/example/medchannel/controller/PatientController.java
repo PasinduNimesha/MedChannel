@@ -55,7 +55,6 @@ public class PatientController {
             System.out.println("Uploaded profile picture to S3");
         }
 
-        // Set the profile picture URL in the DTO
         return new ResponseEntity<>(PatientService.savePatient(patientDTO), HttpStatus.CREATED);
     }
 }
