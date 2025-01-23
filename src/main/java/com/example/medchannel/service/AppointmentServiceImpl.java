@@ -107,7 +107,6 @@ public class AppointmentServiceImpl implements AppointmentService {
         if (!StringUtils.hasLength(doc_id)) {
             throw new AppointmentException("Doctor id cannot be null");
         }
-
         Map<String, AttributeValue> eav = new HashMap<>();
         eav.put(":doc_id", new AttributeValue().withS(doc_id));
 
