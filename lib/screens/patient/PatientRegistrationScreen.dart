@@ -68,7 +68,6 @@ class _PatientRegisterationScreenState extends State<PatientRegisterationScreen>
           body: jsonEncode(registrationData),
         );
 
-        // Check the response status
         if (response.statusCode == 201) {
           // Registration successful
           ScaffoldMessenger.of(context).showSnackBar(
