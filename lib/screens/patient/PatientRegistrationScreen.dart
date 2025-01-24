@@ -75,7 +75,6 @@ class _PatientRegisterationScreenState extends State<PatientRegisterationScreen>
           );
           Navigator.push(context, MaterialPageRoute(builder: (context) => PatientHomeScreen(patientId: widget.id,)));
         } else {
-          // Registration failed
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Registration Failed: ${response.body}')),
           );
