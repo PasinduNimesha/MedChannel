@@ -7,7 +7,8 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 
 class PatientProfile extends StatefulWidget {
-  const PatientProfile({super.key});
+  final String patientId;
+  const PatientProfile({super.key, required this.patientId});
 
   @override
   State<PatientProfile> createState() => _PatientProfileState();
@@ -65,6 +66,9 @@ class _PatientProfileState extends State<PatientProfile> {
     );
 
     request.files.add(pic);
+
+    // Add patientId as a field
+    request.fields['patientID'] = widget.patientId;
 
     try {
       var response = await request.send();

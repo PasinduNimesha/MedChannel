@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -7,7 +8,7 @@ import 'PatientHomeScreen.dart';
 
 class PatientRegisterationScreen extends StatefulWidget {
   final String id;
-  const PatientRegisterationScreen({Key? key, required this.id}) : super(key: key);
+  const PatientRegisterationScreen({super.key, required this.id});
 
   @override
   _PatientRegisterationScreenState createState() => _PatientRegisterationScreenState();
@@ -18,6 +19,7 @@ class _PatientRegisterationScreenState extends State<PatientRegisterationScreen>
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
+  final TextEditingController dobController = TextEditingController();
   final TextEditingController genderController = TextEditingController();
   final TextEditingController bloodTypeController = TextEditingController();
 
@@ -34,6 +36,7 @@ class _PatientRegisterationScreenState extends State<PatientRegisterationScreen>
       final lastName = lastNameController.text;
       final address = addressController.text;
       final phone = phoneController.text;
+      final dob = dobController.text;
       final gender = genderController.text;
       final bloodType = bloodTypeController.text;
 
@@ -45,10 +48,12 @@ class _PatientRegisterationScreenState extends State<PatientRegisterationScreen>
         "last_name": lastName,
         "address": address,
         "phone": phone,
+        "dob": dob,
         "gender": gender,
         "blood_type": bloodType,
         "created_at": DateTime.now().toIso8601String(),
-        "updated_at": DateTime.now().toIso8601String()
+        "updated_at": DateTime.now().toIso8601String(),
+        "image_url": " "
 
       };
 
@@ -69,9 +74,7 @@ class _PatientRegisterationScreenState extends State<PatientRegisterationScreen>
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Registration Successful!')),
           );
-          //extract patientID
-          final patientId = jsonDecode(response.body)['id'].toString();
-          Navigator.push(context, MaterialPageRoute(builder: (context) => PatientHomeScreen(patientId: patientId,)));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => PatientHomeScreen(patientId: widget.id,)));
         } else {
           // Registration failed
           ScaffoldMessenger.of(context).showSnackBar(
@@ -184,6 +187,15 @@ class _PatientRegisterationScreenState extends State<PatientRegisterationScreen>
                             ),
                             borderRadius: BorderRadius.circular(8)),
                       ),
+                    ),
+                    const SizedBox(height: 30),
+                    InputDatePickerFormField(
+                      firstDate: DateTime(1900),
+                      lastDate: DateTime.now(),
+                      fieldLabelText: 'Date of Birth',
+                      onDateSubmitted: (DateTime value) {
+                        dobController.text = value.toString();
+                      },
                     ),
                     const SizedBox(height: 30),
                     TextFormField(

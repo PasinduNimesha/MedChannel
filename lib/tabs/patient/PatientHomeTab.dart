@@ -6,7 +6,8 @@ import 'package:med_channel/styles/colors.dart';
 import 'package:med_channel/styles/styles.dart';
 import 'package:http/http.dart' as http;
 
-import '../../screens/PhysicianDetailScreen.dart';
+import '../../screens/physician/PhysicianDetailScreen.dart';
+import '../../widgets/UserIntro.dart';
 
 Future<List<Map<String, dynamic>>> fetchTopDoctors() async {
   final response = await http.get(Uri.parse('http://192.168.43.214:8081/api/v1/physician/all'));
@@ -71,7 +72,9 @@ class _PatientHomeTabState extends State<PatientHomeTab> {
             SizedBox(
               height: 20,
             ),
-            UserIntro(),
+            UserIntro(username: "bruh", patientId: widget.patientId, onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => PatientProfile(patientId: widget.patientId)));
+            }),
             SizedBox(
               height: 10,
             ),
@@ -217,9 +220,9 @@ class AppointmentCard extends StatelessWidget {
   final void Function() onTap;
 
   const AppointmentCard({
-    Key? key,
+    super.key,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -471,46 +474,6 @@ class SearchInput extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class UserIntro extends StatelessWidget {
-  const UserIntro({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            Text(
-              'Hello',
-              style: TextStyle(fontWeight: FontWeight.w500),
-            ),
-            Text(
-              'Brad King 👋',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-            ),
-          ],
-        ),
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            shape: CircleBorder(),
-          ),
-          onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => PatientProfile()));
-          },
-          child: const CircleAvatar(
-            backgroundImage: AssetImage('assets/person.jpeg'),
-            minRadius: 30,
-          ),
-        )
-      ],
     );
   }
 }
