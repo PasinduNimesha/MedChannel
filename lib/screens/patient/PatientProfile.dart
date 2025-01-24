@@ -19,7 +19,7 @@ class _PatientProfileState extends State<PatientProfile> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
 
-  // State for profile picture
+
   File? _profilePicture;
 
   // Function to pick an image from the gallery
