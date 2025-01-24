@@ -23,7 +23,7 @@ class _PatientRegisterationScreenState extends State<PatientRegisterationScreen>
 
 
 
-  //formkey
+
   final _formKey = GlobalKey<FormState>();
 
   // This function will be triggered when the "Register An Account" button is pressed.
